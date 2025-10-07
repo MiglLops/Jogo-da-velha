@@ -1,24 +1,38 @@
 #Jogo da velha - inicio 24/09/2025
 def jogar():
-    lista_print = ["[0]", "[1]", "[2]", "[3]",
-            "[4]", "[5]", "[6]",
-            "[7]", "[8]", "[9]"]
+    lista_print = ["0",    " 1 ", " 2 ", " 3 ",
+                           " 4 ", " 5 ", " 6 ",
+                           " 7 ", " 8 ", " 9 "]
 
     def grades():
-        print(lista_print[1], lista_print[2], lista_print[3])
-        print(lista_print[4], lista_print[5], lista_print[6])
-        print(lista_print[7], lista_print[8], lista_print[9])
+        print("┌───┬───┬───┐")
+        print(f"│{lista_print[1]}│{lista_print[2]}│{lista_print[3]}│")
+        print("├───┼───┼───┤")
+        print(f"│{lista_print[4]}│{lista_print[5]}│{lista_print[6]}│")
+        print("├───┼───┼───┤")
+        print(f"│{lista_print[7]}│{lista_print[8]}│{lista_print[9]}│")
+        print("└───┴───┴───┘")
         print()
 
+    def detectar_escolha():
+        global escolha
+        if lista_print[escolha] == " X " or lista_print[escolha] == " O ":
+            print("Casa já ocupada! Escolha outra.")
+            escolha = int(input("Escolha a casa para jogar novamente:")) 
+            detectar_escolha()  
+
     def turnos():
-        escolha = int(input("Escolha a casa para jogar 'X':"))
+        global escolha
+        escolha = int(input("Escolha a casa para jogar 'X':"))  
+        detectar_escolha()     
         pop = lista_print.pop(escolha)
-        X = lista_print.insert(escolha, "X") 
+        X = lista_print.insert(escolha, " X ") 
         grades()
         detectar_venceu()
-        escolha = int(input("Escolha a casa para jogar 'O':"))
+        escolha = int(input("Escolha a casa para jogar 'O':")) 
+        detectar_escolha()     
         pop = lista_print.pop(escolha)
-        O = lista_print.insert(escolha, "O") 
+        O = lista_print.insert(escolha, " O ") 
 
     def detectar_venceu():
         combinacoes = [
